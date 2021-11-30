@@ -1,16 +1,18 @@
+import java.util.Arrays;
 
-public class Vetor {
-    private String[] elementos;
+public class ListaComGenerics<T> {
+    
+    private T[] elementos;
     private int tamanho;
 
-    public Vetor(int capacidade){
-        this.elementos = new String[capacidade];
+    public ListaComGenerics(int capacidade){ //constructor
+        this.elementos = (T[]) new Object[capacidade];
         this.tamanho = 0;
     }
 
     private void aumentaCapacidade(){
         if(this.tamanho == this.elementos.length){
-            String[] elementosNovos = new String[this.elementos.length * 2];
+            T[] elementosNovos = (T[]) new Object[this.elementos.length * 2];
             for(int i=0; i<this.elementos.length; i++){
                 elementosNovos[i] = this.elementos[i];
             }
@@ -18,7 +20,7 @@ public class Vetor {
         }
     }
 
-    public boolean adiciona(String elemento){
+    public boolean adiciona(T elemento){
         this.aumentaCapacidade();
         if(this.tamanho < this.elementos.length){
             this.elementos[this.tamanho] = elemento;
@@ -30,7 +32,7 @@ public class Vetor {
         }
     }
 
-    public boolean adicionaNaPosicao(int posicao,String elemento){
+    public boolean adicionaNaPosicao(int posicao,T elemento){
         if(!(posicao >= 0 && posicao < tamanho)){
             throw new IllegalArgumentException("Posição inválida");
         }
@@ -46,14 +48,18 @@ public class Vetor {
         return true;        
     }
 
-    public String busca(int posicao){
+    public T obtem(int posicao){
+        return this.busca(posicao);
+    }
+
+    public T busca(int posicao){
         if(!(posicao >= 0 && posicao < tamanho)){
             throw new IllegalArgumentException("Posição inválida");
         }
         return this.elementos[posicao];
     }
 
-    public int buscaPosicao(String el){
+    public int buscaPosicao(T el){
         for (int i = 0; i < elementos.length; i++) { //busca sequencial
             if(this.elementos[i].equals(el)){
                 return i;
@@ -85,6 +91,35 @@ public class Vetor {
         }
     }
 
+    //sobrecarga
+    public void removeElementoGenerico(T el){
+        int pos = this.buscaPosicao(el);
+        if(pos > -1) {
+            this.removeDaPosicao(pos);
+        }
+    }
+
+    public void removeTodosElementos(){
+        for (int i = 0; i < this.tamanho; i++) {
+            this.elementos[i] = null;
+        }
+        this.tamanho = 0;
+    }
+
+    public boolean contem(T elemento){
+        return buscaPosicao(elemento) > -1;
+    }
+
+    public int ultimoIndice(T el){
+        int ultimaOcorrencia = -1;
+        for (int i = this.tamanho-1; i >= 0; i--) { //busca sequencial
+            if(this.elementos[i].equals(el)){
+                ultimaOcorrencia = i;
+            }
+        }
+        return ultimaOcorrencia;
+    }
+
     @Override
     public String toString(){
 
@@ -103,5 +138,6 @@ public class Vetor {
         s.append(" ]");
 
         return s.toString();
-    }
+    }  
+
 }
