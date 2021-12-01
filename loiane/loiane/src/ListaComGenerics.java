@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class ListaComGenerics<T> {
     
     private T[] elementos;

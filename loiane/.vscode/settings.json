@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": [
+        "loiane/src",
+        "loiane_pilha/stack/src"
+    ]
+}

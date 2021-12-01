@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -55,8 +54,7 @@ public class Menu {
             list.adicionaNaPosicao(pos, contato);
             System.out.println("Contato adicionado com sucesso");
             System.out.println(contato);
-        } catch (Exception e) {
-            //TODO: handle exception
+        } catch (Exception e) {            
             System.out.println("Contato não adicionado");
         }
         
@@ -84,8 +82,7 @@ public class Menu {
                 num = Integer.parseInt(entrada);  
                 
                 entradaValida = true;
-            } catch (Exception e) {
-                //TODO: handle exception
+            } catch (Exception e) {                
                 System.out.println("Entrada inválida, digite novamente");
             }
             
@@ -125,7 +122,6 @@ public class Menu {
                     throw new Exception();
                 }
             } catch (Exception e) {
-                //TODO: handle exception
                 System.out.println("Entrada inválida\n\n");
             }
 
